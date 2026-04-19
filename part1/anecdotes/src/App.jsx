@@ -26,11 +26,20 @@ const App = () => {
     return setVotes(newVotes);
   };
 
+  let max = 0;
+  for (let i = 1; i < votes.length; i++) {
+    if (votes[i] > votes[max]) {
+      max = i;
+    }
+  }
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
       <button onClick={addVote}>vote</button>
       <button onClick={setRandom}>next anecdote</button>
+      <h1>Anecdote with most votes</h1>
+      <p>{anecdotes[max]}</p>
     </div>
   );
 };
