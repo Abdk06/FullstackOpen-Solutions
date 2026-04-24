@@ -7,7 +7,7 @@ const Persons = (props) => {
         )
         .map((person) => (
           <p key={person.name}>
-            {person.name} {person.num}
+            {person.name} {person.number}
           </p>
         ))}
     </div>

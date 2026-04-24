@@ -32,7 +32,7 @@ const App = () => {
       alert(`${newName} is already added to phonebook`);
       return;
     }
-    const newPersons = persons.concat({ name: newName, num: newNum });
+    const newPersons = persons.concat({ name: newName, number: newNum });
     setPersons(newPersons);
     setNewName("");
     setNewNum("");
