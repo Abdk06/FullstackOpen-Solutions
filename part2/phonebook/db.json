@@ -24,6 +24,16 @@
       "name": "test name",
       "number": "1234-51231",
       "id": "2E28XJXFEZA"
+    },
+    {
+      "name": "testname2",
+      "number": "912039-1231",
+      "id": "Yn0PBuIJf6U"
+    },
+    {
+      "name": "testname3",
+      "number": "",
+      "id": "H3i19a47nIM"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
