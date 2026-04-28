@@ -32,10 +32,17 @@ const App = () => {
       alert(`${newName} is already added to phonebook`);
       return;
     }
-    const newPersons = persons.concat({ name: newName, number: newNum });
-    setPersons(newPersons);
-    setNewName("");
-    setNewNum("");
+
+    const newPerson = {
+      name: newName,
+      number: newNum,
+    };
+
+    axios.post("http://localhost:3001/persons", newPerson).then((response) => {
+      setPersons(persons.concat(response.data));
+      setNewName("");
+      setNewNum("");
+    });
   };
 
   const handleFilterChange = (event) => {
