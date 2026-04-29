@@ -36,7 +36,7 @@ const App = () => {
       number: newNum,
     };
 
-    servicePerson.add(newPerson).then((addedPerson) => {
+    servicePerson.addPerson(newPerson).then((addedPerson) => {
       setPersons(persons.concat(addedPerson));
       setNewName("");
       setNewNum("");
@@ -45,6 +45,14 @@ const App = () => {
 
   const handleFilterChange = (event) => {
     setNewFilter(event.target.value);
+  };
+
+  const deletePerson = (person) => {
+    if (confirm(`Delete ${person.name}?`)) {
+      servicePerson.deletePerson(person.id).then((deletedPerson) => {
+        setPersons(persons.filter((person) => person.id != deletedPerson.id));
+      });
+    }
   };
 
   return (
@@ -60,7 +68,11 @@ const App = () => {
         valueNum={newNum}
       ></PersonForm>
       <h3>Numbers</h3>
-      <Persons persons={persons} filter={newFilter}></Persons>
+      <Persons
+        persons={persons}
+        filter={newFilter}
+        onClick={deletePerson}
+      ></Persons>
     </div>
   );
 };
