@@ -10,4 +10,9 @@ const addPerson = (newPerson) =>
 const deletePerson = (id) =>
   axios.delete(`${db}/${id}`).then((response) => response.data);
 
-export default { getAll, addPerson, deletePerson };
+const updatePerson = (newPerson) =>
+  axios
+    .put(`${db}/${newPerson.id}`, newPerson)
+    .then((response) => response.data);
+
+export default { getAll, addPerson, deletePerson, updatePerson };

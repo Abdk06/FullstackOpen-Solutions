@@ -2,7 +2,7 @@
   "persons": [
     {
       "name": "Arto Hellas",
-      "number": "040-123456",
+      "number": "9901-3123-1313341",
       "id": "1"
     },
     {
@@ -19,6 +19,11 @@
       "name": "Mary Poppendieck",
       "number": "39-23-6423122",
       "id": "4"
+    },
+    {
+      "name": "glitter",
+      "number": "034910934",
+      "id": "6_7W9IqGil4"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
