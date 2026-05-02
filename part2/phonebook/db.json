@@ -22,13 +22,8 @@
     },
     {
       "name": "glitter",
-      "number": "034910934",
-      "id": "6_7W9IqGil4"
-    },
-    {
-      "name": "testperson",
-      "number": "12314--4123231",
-      "id": "QV3iCt-agxY"
+      "number": "123123",
+      "id": "1Jq__hRYjtA"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

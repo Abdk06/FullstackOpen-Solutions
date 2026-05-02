@@ -35,13 +35,25 @@ const App = () => {
           `${newName} is already added to phonebook, replace the old number with a new one?`,
         )
       ) {
-        servicePerson.updatePerson(updatedNumber).then((updatedPerson) => {
-          setPersons(
-            persons.map((person) =>
-              person.id === updatedPerson.id ? updatedPerson : person,
-            ),
-          );
-        });
+        servicePerson
+          .updatePerson(updatedNumber)
+          .then((updatedPerson) => {
+            setPersons(
+              persons.map((person) =>
+                person.id === updatedPerson.id ? updatedPerson : person,
+              ),
+            );
+          })
+          .catch((error) => {
+            setMessage({
+              message: `Information of ${updatedNumber.name} has already been removed from server`,
+              type: "fail",
+            });
+            setTimeout(() => setMessage({ message: null, type: null }), 5000);
+            setPersons(
+              persons.filter((person) => person.id != updatedNumber.id),
+            );
+          });
         return;
       } else {
         return;

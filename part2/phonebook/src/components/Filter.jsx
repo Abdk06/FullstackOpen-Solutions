@@ -1,7 +1,7 @@
 const Filter = (props) => {
   return (
     <div>
-      filter shown with
+      filter shown with{" "}
       <input onChange={props.onChange} value={props.value}></input>
     </div>
   );
