@@ -3,12 +3,13 @@ import servicePerson from "./services/persons";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
-
+import Notification from "./components/Notification";
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNum, setNewNum] = useState("");
   const [newFilter, setNewFilter] = useState("");
+  const [newMessage, setMessage] = useState({ message: null, type: null });
 
   const hook = () => {
     servicePerson.getAll().then((initialPersons) => setPersons(initialPersons));
@@ -54,6 +55,8 @@ const App = () => {
 
     servicePerson.addPerson(newPerson).then((addedPerson) => {
       setPersons(persons.concat(addedPerson));
+      setMessage({ message: `Added ${addedPerson.name}`, type: "success" });
+      setTimeout(() => setMessage({ message: null, type: null }), 5000);
       setNewName("");
       setNewNum("");
     });
@@ -74,6 +77,10 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification
+        message={newMessage.message}
+        type={newMessage.type}
+      ></Notification>
       <Filter onChange={handleFilterChange} value={newFilter}></Filter>
       <h3>Add a new</h3>
       <PersonForm
