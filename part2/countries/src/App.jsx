@@ -5,6 +5,7 @@ import { getAllCountries } from "./services/countries";
 const App = () => {
   const [newValue, setValue] = useState("");
   const [countries, setCountries] = useState([]);
+  const [detailedCountries, setDetailedCountries] = useState([]);
 
   const hook = () => {
     getAllCountries().then((countries) => setCountries(countries));
@@ -14,6 +15,7 @@ const App = () => {
 
   const handleChange = (event) => {
     setValue(event.target.value);
+    setDetailedCountries([]);
   };
 
   const getCountries = countries.filter((country) =>
@@ -22,10 +24,18 @@ const App = () => {
 
   const countriesToShow = newValue != "" ? getCountries : [];
 
+  const showCountry = (country) => {
+    setDetailedCountries(detailedCountries.concat(country.name.common));
+  };
+
   return (
     <div>
       find countries <input value={newValue} onChange={handleChange}></input>
-      <Countries countries={countriesToShow}></Countries>
+      <Countries
+        countries={countriesToShow}
+        onClick={showCountry}
+        detailedCountries={detailedCountries}
+      ></Countries>
     </div>
   );
 };
