@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Countries from "./components/Countries";
-import { getAllCountries } from "./services/countries";
+import { getAllCountries, getWeather } from "./services/countries";
 
 const App = () => {
   const [newValue, setValue] = useState("");
@@ -25,8 +25,21 @@ const App = () => {
   const countriesToShow = newValue != "" ? getCountries : [];
 
   const showCountry = (country) => {
-    setDetailedCountries(detailedCountries.concat(country.name.common));
+    getWeather(country).then((response) => {
+      setDetailedCountries(
+        detailedCountries.concat({
+          countryName: country.name.common,
+          countryWeather: response,
+        }),
+      );
+    });
   };
+
+  useEffect(() => {
+    if (countriesToShow.length === 1) {
+      showCountry(countriesToShow[0]);
+    }
+  }, [newValue]);
 
   return (
     <div>
