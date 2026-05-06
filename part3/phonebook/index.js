@@ -31,7 +31,7 @@ app.get("/api/persons", (request, response) => {
 });
 
 app.get("/info", (request, response) => {
-  response.send(`<p>Phonebook has info for ${persons.length} people<p>
+  response.send(`<p>Phonebook has info for ${persons.length} people</p>
     <p>${new Date()}`);
 });
 
@@ -47,14 +47,26 @@ app.get("/api/persons/:id", (request, response) => {
 
 app.delete("/api/persons/:id", (request, response) => {
   const personId = request.params.id;
-  persons = persons.filter((person) => person.id != personId);
+  persons = persons.filter((person) => person.id !== personId);
   response.status(204).end();
 });
 
 app.post("/api/persons", (request, response) => {
-  const person = request.body;
+  const body = request.body;
+  if (!body.name) {
+    return response.status(400).json({ error: "name not given" });
+  }
+
+  if (!body.number) {
+    return response.status(400).json({ error: "number not given" });
+  }
+
+  if (persons.find((person) => person.name === body.name)) {
+    return response.status(400).json({ error: "name must be unique" });
+  }
+
   const id = String(Math.floor(Math.random() * 9999999));
-  const newPerson = { id: id, ...person };
+  const newPerson = { id: id, name: body.name, number: body.number };
   persons = persons.concat(newPerson);
   response.json(newPerson);
 });
